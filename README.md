@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d37865bf-8043-421a-9b17-cda822a9ebd9/deploy-status)](https://app.netlify.com/sites/weather-forecaster-api/deploys)
 # Weather Dashboard API
 
 Use the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for cities. Use `localStorage` to store any persistent data.
