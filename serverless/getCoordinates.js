@@ -1,7 +1,9 @@
-const fetch = require('node-fetch');
 const { APIKEY } = process.env;
-
+const baseURL = 'https://api.openweathermap.org';
 
 exports.handler = async (event, context) => {
-console.log(event)
-}
+  return {
+    statusCode: 200,
+    body: JSON.stringify({message: "hello"})
+  }
+};
