@@ -1,4 +1,3 @@
-const apiKey = '';
 const baseURL = 'https://api.openweathermap.org';
 
 const getCoordinates = async () => {
