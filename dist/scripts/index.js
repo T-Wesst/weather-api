@@ -1,5 +1,6 @@
-import { getCoordinates } from './getData';
-console.log(getCoordinates);
+import { getCoordinates } from './getData.js';
+const response = await getCoordinates("London", "imperial");
+console.log(response);
 // const baseURL = 'https://api.openweathermap.org';
 
 // const todayContainer = document.querySelector("#today");

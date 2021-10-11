@@ -5,11 +5,21 @@
 
 // (fetch("./.netlify/functions/getWeather").then(response => response.json()).then(data => console.log(data)))
 
-export const getCoordinates = async () => {
-  const response = await fetch('./.netlify/functions/getCoordinates');
-  const jsonData = response.json();
-  return jsonData;
+export const getCoordinates = async (entryText, units) => {
+  const dataObject = {cityName: entryText,units};
+  console.log(dataObject, "data")
+  try {
+    const dataStream = await fetch('./.netlify/functions/getCoordinates', {method: "POST", body: JSON.stringify(dataObject)});
+    const jsonData = dataStream.json();
+    return jsonData;
+  } catch(err) {
+    console.error(err);
+  }
 }
+
+// export const getWeatherFromCoordinates = async(currLocationObj) => {
+
+// }
 
 // const fetchWeatherData = async (lon, lat) => {
 //   let apiUrl = `${baseURL}/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly&appid=${apiKey}`;
