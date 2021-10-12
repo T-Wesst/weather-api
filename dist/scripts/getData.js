@@ -5,21 +5,40 @@
 
 // (fetch("./.netlify/functions/getWeather").then(response => response.json()).then(data => console.log(data)))
 
-export const getCoordinates = async (entryText, units) => {
-  const dataObject = {cityName: entryText,units};
-  console.log(dataObject, "data")
+export const getCoordinates = async (city, units) => {
+  const dataObject = { city, units };
   try {
-    const dataStream = await fetch('./.netlify/functions/getCoordinates', {method: "POST", body: JSON.stringify(dataObject)});
-    const jsonData = dataStream.json();
-    return jsonData;
+    const dataStream = await fetch('./.netlify/functions/getCoordinates', {
+      method: "POST",
+      body: JSON.stringify(dataObject)
+    });
+    const jsonData = await dataStream.json();
+    console.log("json", jsonData);
+    // return jsonData.body;
   } catch(err) {
     console.error(err);
   }
 }
 
-// export const getWeatherFromCoordinates = async(currLocationObj) => {
+export const getWeatherFromCoordinates = async (locationObject) => {
+  
+  // console.log(locationObject);
+  const { lat, lon, units } = locationObject;
 
-// }
+  const dataObject = { lat,lon, units};
+  // console.log(dataObject);
+
+  try {
+    const weatherStream = await fetch("./.netlify/functions/getWeather", {
+      method: "POST",
+      body: JSON.stringify(dataObject)
+    });
+    const jsonData = await weatherStream.json();
+    return jsonData;
+  } catch(err) {
+    console.error(err);
+  }
+}
 
 // const fetchWeatherData = async (lon, lat) => {
 //   let apiUrl = `${baseURL}/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly&appid=${apiKey}`;

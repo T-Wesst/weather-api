@@ -1,12 +1,25 @@
-import { getCoordinates } from './getData.js';
-const response = await getCoordinates("London", "imperial");
-console.log(response);
-// const baseURL = 'https://api.openweathermap.org';
+import { getCoordinates, getWeatherFromCoordinates } from './getData.js';
+
+    const coordsJSON = await getCoordinates("London", "imperial");
+    console.log("API", coordsJSON);
+    // (coordsJSON);
+  
+// const weatherJSON = await getWeatherFromCoordinates({
+//     name: "current location",
+//     lat: "51.51",
+//     lon: "-0.13",
+//     units: "imperial"
+//   });
+// console.log("API", weatherJSON);
+
+
+
+
 
 // const todayContainer = document.querySelector("#today");
 // const forecastContainer = document.querySelector('#forecast');
 
-// // console.log(localStorage);
+// console.log(localStorage);
 
 
 // let timezone = localStorage.getItem('timezone');
