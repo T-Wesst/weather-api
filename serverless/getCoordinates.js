@@ -1,9 +1,18 @@
+const axios = require('axios').default;
 const { APIKEY } = process.env;
 const baseURL = 'https://api.openweathermap.org';
 
-exports.handler = async (event, context) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({message: "hello"})
+exports.handler = async (event) => {
+  const params = JSON.parse(event.body);
+  const { city, units } = params;
+  const url = `${baseURL}/data/2.5/weather?q=${city}&units=${units}&apikey=${APIKEY}`;
+  try {
+    const { data } = await axios.get(url);
+    return {
+      statusCode: 200,
+      body: JSON.stringify(data)
+    };
+  } catch (err) {
+    return { statusCode: 422, body: err.stack };
   }
 };
