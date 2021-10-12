@@ -13,6 +13,7 @@ export const getCoordinates = async (city, units) => {
       body: JSON.stringify(dataObject)
     });
     return await dataStream.json();
+    // return jsonData.body;
   } catch(err) {
     console.error(err);
   }
