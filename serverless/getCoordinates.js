@@ -2,9 +2,8 @@ const axios = require('axios').default;
 const { APIKEY } = process.env;
 const baseURL = 'https://api.openweathermap.org';
 
-exports.handler = async (event) => {
-  const params = JSON.parse(event.body);
-  const { city, units } = params;
+exports.handler = async event => {
+  const { city, units }  = event.queryStringParameters;
   const url = `${baseURL}/data/2.5/weather?q=${city}&units=${units}&apikey=${APIKEY}`;
   try {
     const { data } = await axios.get(url);
