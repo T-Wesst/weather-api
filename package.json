@@ -1,6 +1,9 @@
 {
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.22.0"
+  },
   "scripts": {
-    "dev": "netlify dev"
+    "dev": "netlify dev",
+    "build": "npm i && cd ./serveless && npm i"
   }
 }
