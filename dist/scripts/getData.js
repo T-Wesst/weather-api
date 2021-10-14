@@ -8,10 +8,7 @@
 export const getCoordinates = async (city, units) => {
   let url = `./.netlify/functions/getCoordinates?city=${city}&units=${units}`;
   try {
-    const dataStream = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify({ city, units })
-    });
+    const dataStream = await fetch(url);
     return await dataStream.json();
   } catch(err) {
     console.error(err);
