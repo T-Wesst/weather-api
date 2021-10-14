@@ -3,8 +3,8 @@ const baseURL = 'https://api.openweathermap.org';
 
 
 exports.handler = async event => {
-  // const params = JSON.parse(event.body);
-  // const {lat, lon, units} = params;
+  const { lat, lon } = event.queryStringParameters;
+  console.log("coordinates",lat, lon);
   // const url = `${baseURL}/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=${units}&appid=${APIKEY}`;
   try {
   //   const weatherStream = await fetch(url);
