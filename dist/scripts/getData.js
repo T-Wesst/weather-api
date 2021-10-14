@@ -6,14 +6,10 @@
 // (fetch("./.netlify/functions/getWeather").then(response => response.json()).then(data => console.log(data)))
 
 export const getCoordinates = async (city, units) => {
-  const dataObject = { city, units };
+  let url = `./.netlify/functions/getCoordinates?city=${city}&units=${units}`;
   try {
-    const dataStream = await fetch('./.netlify/functions/getCoordinates', {
-      method: "POST",
-      body: JSON.stringify(dataObject)
-    });
+    const dataStream = await fetch(url);
     return await dataStream.json();
-    // return jsonData.body;
   } catch(err) {
     console.error(err);
   }

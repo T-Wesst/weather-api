@@ -1,8 +1,7 @@
 import { getCoordinates, getWeatherFromCoordinates } from './getData.js';
 
-    const coordsJSON = await getCoordinates("London", "imperial");
-    console.log("API", coordsJSON);
-    // (coordsJSON);
+const coordsJSON = await getCoordinates("Los Angeles", "imperial");
+console.log("API: Get Coordinates", coordsJSON);
   
 // const weatherJSON = await getWeatherFromCoordinates({
 //     name: "current location",
