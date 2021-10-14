@@ -5,8 +5,8 @@
 
 // (fetch("./.netlify/functions/getWeather").then(response => response.json()).then(data => console.log(data)))
 
-export const getCoordinates = async (city, units) => {
-  let url = `./.netlify/functions/getCoordinates?city=${city}&units=${units}`;
+export const getCoordinates = async (city) => {
+  let url = `./.netlify/functions/getCoordinates?city=${city}`;
   try {
     const dataStream = await fetch(url);
     return await dataStream.json();

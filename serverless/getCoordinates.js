@@ -3,8 +3,8 @@ const { APIKEY } = process.env;
 const baseURL = 'https://api.openweathermap.org';
 
 exports.handler = async event => {
-  const { city, units }  = event.queryStringParameters;
-  const url = `${baseURL}/data/2.5/weather?q=${city}&units=${units}&apikey=${APIKEY}`;
+  const { city }  = event.queryStringParameters;
+  const url = `${baseURL}/data/2.5/weather?q=${city}&apikey=${APIKEY}`;
   try {
     const { data } = await axios.get(url);
     return {
