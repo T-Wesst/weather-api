@@ -4,6 +4,6 @@
   },
   "scripts": {
     "dev": "netlify dev",
-    "build": "npm i && cd ./serveless && npm i"
+    "build": "npm i && cd ./serverless && npm i"
   }
 }
