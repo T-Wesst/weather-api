@@ -10,6 +10,7 @@ export const getCoordinates = async (city, units) => {
   try {
     const dataStream = await fetch(url);
     return await dataStream.json();
+    // return jsonData.body;
   } catch(err) {
     console.error(err);
   }
