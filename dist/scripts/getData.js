@@ -1,6 +1,6 @@
 export const getCurrentLocation = async () => {
-  const {coords:{longitude}, coords:{latitude} } = await new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject));
-  return {longitude,latitude};
+  const { coords } = await new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject));
+  return { coord: { lat: coords.latitude, lon:coords.longitude }};
 }
 
 

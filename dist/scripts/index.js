@@ -18,12 +18,13 @@ let handleSearchFormSubmit = async event => {
   const coordsJSON = await getCoordinates(searchInput.value);
   const weatherJSON = await getWeatherFromCoordinates(coordsJSON);
   searchInput.value = "";
-  console.log("weather JSON", weatherJSON);
+  console.log("searched weather JSON", weatherJSON);
 }
 
 const initApp = async () => {
-  const currentLocation = await getCurrentLocation();
-  console.log(currentLocation);
+  const currentCoords = await getCurrentLocation();
+  const currentWeatherJSON = await getWeatherFromCoordinates(currentCoords);
+  console.log(currentWeatherJSON);
 }
 
 
