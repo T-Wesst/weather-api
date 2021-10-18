@@ -26,4 +26,4 @@ Given a weather dashboard with form inputs, a user can search for a city and:
 
 - [x] deploy the application on Netlify
 - [x] do not expose API Key
-- [ ] add unit tests
+- [x] add unit tests
