@@ -24,12 +24,3 @@ let handleSearchFormSubmit = async event => {
 
 
 searchForm.addEventListener("submit", handleSearchFormSubmit);
-
-  
-// const weatherJSON = await getWeatherFromCoordinates({
-//     name: "current location",
-//     lat: "51.51",
-//     lon: "-0.13",
-//     units: "imperial"
-//   });
-// console.log("API", weatherJSON);
