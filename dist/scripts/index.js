@@ -1,4 +1,4 @@
-import { getCoordinates, getWeatherFromCoordinates } from './getData.js';
+import { getCoordinates, getCurrentLocation, getWeatherFromCoordinates } from './getData.js';
 
 // TODAYS CONTENT
 const todayContainer = document.querySelector("#today");
@@ -21,6 +21,13 @@ let handleSearchFormSubmit = async event => {
   console.log("weather JSON", weatherJSON);
 }
 
+const initApp = async () => {
+  const currentLocation = await getCurrentLocation();
+  console.log(currentLocation);
+}
 
 
+
+
+document.addEventListener("DOMContentLoaded", initApp);
 searchForm.addEventListener("submit", handleSearchFormSubmit);
