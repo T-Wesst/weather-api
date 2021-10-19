@@ -8,7 +8,6 @@ const forecastContainer = document.querySelector('#forecast');
 const searchInput = document.querySelector('#search-input');
 const searchForm = document.querySelector('#search-form');
 
-
 let handleSearchFormSubmit = async event => {
   if(!searchInput.value.trim()) return;
   event.preventDefault();
@@ -23,9 +22,6 @@ const initApp = async () => {
   const currentWeatherJSON = await getWeatherFromCoordinates(currentCoords);
   buildUI(currentWeatherJSON);
 }
-
-
-
 
 document.addEventListener("DOMContentLoaded", initApp);
 searchForm.addEventListener("submit", handleSearchFormSubmit);
