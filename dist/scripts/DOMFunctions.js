@@ -1,4 +1,31 @@
+export const buildUI = (weatherData) => {
+  console.log(weatherData)
+  // const {timezone} = weatherData;
+  // let todayContainer = document.querySelector("#today");
+  // let todayCard = document.createElement('div');
+  // todayCard.innerHTML = `
+  //   <div class="container">
+  //     <h5 class="card-title">TIMEZONE: ${timezone}</h5>
+  //     <div class="card mb-3">
+  //     <div class="row g-0">
+  //     <div class="col-md-4">
+  //     <img src="..." class="img-fluid rounded-start" alt="...">
+  //     </div>
+  //     <div class="col-md-8">
+  //     <div class="card-body">
+  //     <p class="card-text">Today will be TEMP F with a wind speed of TEMP MPH and a humidity of TEMP % and a UV Index of TEMP.</p>
+  //     </div>
+  //     </div>
+  //     </div>
+  //     </div>
+  //     </div>`;
 
+  //   let cardBody = document.createElement('div');
+  //   cardBody.setAttribute("class", "card-body");
+  //   todayCard.append(cardBody);
+  //   todayContainer.append(todayCard);
+
+}
 
 // console.log(localStorage);
 
@@ -9,22 +36,6 @@
 // let humidity = localStorage.getItem('humidity');
 // let uvIndex = localStorage.getItem('uvIndex');
 // let dt = localStorage.getItem('dt');
-
-// let todayCard = document.createElement('div');
-// todayCard.innerHTML = `
-// <h5 class="card-title">${timezone}</h5>
-// <div class="card mb-3">
-// <div class="row g-0">
-// <div class="col-md-4">
-// <img src="..." class="img-fluid rounded-start" alt="...">
-// </div>
-// <div class="col-md-8">
-// <div class="card-body">
-// <p class="card-text">Today will be ${temp}F with a wind speed of ${windSpeed} MPH and a humidity of ${humidity}% and a UV Index of ${uvIndex}.</p>
-// </div>
-// </div>
-// </div>
-// </div>`;
 
 // let fiveDayCards = document.createElement('div');
 // fiveDayCards.innerHTML = `
