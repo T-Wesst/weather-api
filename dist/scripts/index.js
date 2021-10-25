@@ -9,7 +9,6 @@ export const searchHistoryContainer = document.querySelector('#history');
 const searchInput = document.querySelector('#search-input');
 const searchForm = document.querySelector('#search-form');
 
-
 let handleSearchFormSubmit = async event => {
   if(!searchInput.value.trim()) return;
   event.preventDefault();
@@ -26,7 +25,6 @@ const initApp = async () => {
   buildUI(currentWeatherJSON);
   getHistory();
 }
-
 
 document.addEventListener("DOMContentLoaded", initApp);
 searchForm.addEventListener("submit", handleSearchFormSubmit);
