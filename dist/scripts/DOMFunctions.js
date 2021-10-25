@@ -26,7 +26,7 @@ export const buildUI = (weatherData) => {
   //   todayContainer.append(todayCard);
 
 }
-let searchHistory = ["kansas", "london", "los angeles"];
+let searchHistory = ["los angeles", "london", "china"];
 
 export const renderSearchHistory = () => {
   const searchHistoryContainer = document.querySelector('#history');
@@ -45,6 +45,13 @@ export const appendToHistory = (searchText) => {
   if (searchHistory.includes(searchText)) return;
   searchHistory.push(searchText);
   localStorage.setItem('search-history', JSON.stringify(searchHistory));
+  renderSearchHistory();
+}
+
+export const getHistory = () => {
+  let storedHistory = localStorage.getItem('search-history');
+  if(storedHistory) searchHistory = JSON.parse(storedHistory);
+  console.log(searchHistory, "PARSED")
   renderSearchHistory();
 }
 
