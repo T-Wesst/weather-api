@@ -4,6 +4,10 @@
   },
   "scripts": {
     "dev": "netlify dev",
-    "build": "npm i && cd ./serverless && npm i"
+    "build": "npm i && cd ./serverless && npm i",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^27.2.5"
   }
 }
