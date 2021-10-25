@@ -1,9 +1,10 @@
 import { getCoordinates, getCurrentLocation, getWeatherFromCoordinates } from './getData.js';
-import { appendToHistory, buildUI, getHistory } from './DOMFunctions.js';
+import { appendToHistory, buildUI, getHistory, handleSearchHistoryClick } from './DOMFunctions.js';
 
 // TODAYS CONTENT
 const todayContainer = document.querySelector("#today");
 const forecastContainer = document.querySelector('#forecast');
+export const searchHistoryContainer = document.querySelector('#history');
 // FORM
 const searchInput = document.querySelector('#search-input');
 const searchForm = document.querySelector('#search-form');
@@ -29,3 +30,4 @@ const initApp = async () => {
 
 document.addEventListener("DOMContentLoaded", initApp);
 searchForm.addEventListener("submit", handleSearchFormSubmit);
+searchHistoryContainer.addEventListener("click", handleSearchHistoryClick)
