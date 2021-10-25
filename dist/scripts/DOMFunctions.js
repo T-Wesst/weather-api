@@ -26,7 +26,8 @@ export const buildUI = (weatherData) => {
   //   todayContainer.append(todayCard);
 
 }
-let searchHistory = ["hi", "hello"];
+let searchHistory = ["kansas", "london", "los angeles"];
+
 export const renderSearchHistory = () => {
   const searchHistoryContainer = document.querySelector('#history');
   searchHistoryContainer.innerHTML = '';
@@ -38,6 +39,13 @@ export const renderSearchHistory = () => {
     btn.textContent = searchHistory[index];
     searchHistoryContainer.append(btn);
   }
+}
+
+export const appendToHistory = (searchText) => {
+  if (searchHistory.includes(searchText)) return;
+  searchHistory.push(searchText);
+  localStorage.setItem('search-history', JSON.stringify(searchHistory));
+  renderSearchHistory();
 }
 
 
