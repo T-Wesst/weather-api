@@ -7,8 +7,7 @@ exports.handler = async event => {
   const { lat, lon } = event.queryStringParameters
   const url = `${baseURL}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${APIKEY}`;
   try {
-    const {data} = await axios.get(url);
-    console.log(data);
+    const { data } = await axios.get(url);
     return {
       statusCode: 200,
       body: JSON.stringify(data)
