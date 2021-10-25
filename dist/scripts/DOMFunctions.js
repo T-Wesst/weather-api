@@ -26,8 +26,19 @@ export const buildUI = (weatherData) => {
   //   todayContainer.append(todayCard);
 
 }
-
-// console.log(localStorage);
+let searchHistory = ["hi", "hello"];
+export const renderSearchHistory = () => {
+  const searchHistoryContainer = document.querySelector('#history');
+  searchHistoryContainer.innerHTML = '';
+  let endOfHistoryLength = searchHistory.length;
+  for(let index = endOfHistoryLength; index >= 0; index--){
+    let btn = document.createElement('button');
+    btn.classList.add('btn');
+    btn.setAttribute('data-search', searchHistory[index]);
+    btn.textContent = searchHistory[index];
+    searchHistoryContainer.append(btn);
+  }
+}
 
 
 // let timezone = localStorage.getItem('timezone');

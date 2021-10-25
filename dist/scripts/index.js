@@ -1,5 +1,5 @@
 import { getCoordinates, getCurrentLocation, getWeatherFromCoordinates } from './getData.js';
-import { buildUI } from './DOMFunctions.js';
+import { buildUI, renderSearchHistory } from './DOMFunctions.js';
 
 // TODAYS CONTENT
 const todayContainer = document.querySelector("#today");
@@ -24,6 +24,7 @@ const initApp = async () => {
   buildUI(currentWeatherJSON);
 }
 
+renderSearchHistory();
 
 
 
