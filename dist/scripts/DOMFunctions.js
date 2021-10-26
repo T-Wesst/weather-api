@@ -1,34 +1,47 @@
 import { getCoordinates, getWeatherFromCoordinates } from "./getData.js";
-import { searchHistoryContainer } from "./index.js";
+import { searchHistoryContainer, todayContainer } from "./index.js";
 
-export const buildUI = (weatherData) => {
-  console.log(weatherData)
-  // const {timezone} = weatherData;
-  // let todayContainer = document.querySelector("#today");
-  // let todayCard = document.createElement('div');
-  // todayCard.innerHTML = `
-  //   <div class="container">
-  //     <h5 class="card-title">TIMEZONE: ${timezone}</h5>
-  //     <div class="card mb-3">
-  //     <div class="row g-0">
-  //     <div class="col-md-4">
-  //     <img src="..." class="img-fluid rounded-start" alt="...">
-  //     </div>
-  //     <div class="col-md-8">
-  //     <div class="card-body">
-  //     <p class="card-text">Today will be TEMP F with a wind speed of TEMP MPH and a humidity of TEMP % and a UV Index of TEMP.</p>
-  //     </div>
-  //     </div>
-  //     </div>
-  //     </div>
-  //     </div>`;
+dayjs.extend(window.dayjs_plugin_utc);
+dayjs.extend(window.dayjs_plugin_timezone);
+// ============== CURRENT WEATHER UI ============== 
 
-  //   let cardBody = document.createElement('div');
-  //   cardBody.setAttribute("class", "card-body");
-  //   todayCard.append(cardBody);
-  //   todayContainer.append(todayCard);
+export const buildUI = (searchText, weatherData) => {
+  if(searchText === '') searchText = weatherData.timezone;
+  const { humidity, temp, wind_speed, uvi  } = weatherData.current;
+  let {timezone, current } = weatherData;
+  let uvClass = '';
+  let iconURL = `https://openweathermap.org/img/w/${current.weather[0].icon}.png`;
+  let iconDescription = current.weather[0].description || current[0].main;
+  let date = dayjs().tz(timezone).format('M/D/YYYY');
 
-}
+  if (uvi < 3) {
+    uvClass = 'success';
+  } else if (uvi < 7) {
+    uvClass = 'warning';
+  } else {
+    uvClass = 'danger';
+  }
+
+  let card = document.createElement('div');
+  card.setAttribute('class', 'card');
+  card.innerHTML = `
+    <div class="card-body">
+      <h2 class="h3 card-title">
+        ${searchText} ${date}
+        <img src="${iconURL}" alt="${iconDescription}">
+      </h2>
+      <p class="card-text">Temp: ${temp}°F</p>
+      <p class="card-text">Wind: ${wind_speed} MPH</p>
+      <p class="card-text">Humidity: ${humidity} %</p>
+      <p class="card-text">
+        UV Index:
+        <button class="btn ${uvClass}">${uvi}</button>
+      </p>
+    </div>
+  `;
+  todayContainer.innerHTML = '';
+  todayContainer.append(card);
+  }
 
 // =============== HISTORY =============== //
 let searchHistory = [];
@@ -62,5 +75,6 @@ export const handleSearchHistoryClick = async (event) => {
   let btn = event.target;
   let historySearch = btn.getAttribute('data-search');
   const coordsJSON = await getCoordinates(historySearch);
-  await getWeatherFromCoordinates(coordsJSON);
+  const weatherJSON = await getWeatherFromCoordinates(coordsJSON);
+  buildUI(historySearch, weatherJSON);
 }
