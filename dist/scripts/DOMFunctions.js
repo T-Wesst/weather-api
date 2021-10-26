@@ -48,7 +48,7 @@ let searchHistory = [];
 
 const renderSearchHistory = () => {
   searchHistoryContainer.innerHTML = '';
-  let endOfHistoryLength = searchHistory.length;
+  let endOfHistoryLength = searchHistory.length - 1;
   for(let index = endOfHistoryLength; index >= 0; index--){
     let btn = document.createElement('button');
     btn.classList.add('.btn-history');
