@@ -2,6 +2,10 @@
   background-color: #06BEE1;
 }
 
+.success {
+  background-color: green;
+}
+
 .header {
   background-color: #03256C;
   padding: 12px;
