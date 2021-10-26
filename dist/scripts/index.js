@@ -2,8 +2,8 @@ import { getCoordinates, getCurrentLocation, getWeatherFromCoordinates } from '.
 import { appendToHistory, buildUI, getHistory, handleSearchHistoryClick } from './DOMFunctions.js';
 
 // TODAYS CONTENT
-const todayContainer = document.querySelector("#today");
-const forecastContainer = document.querySelector('#forecast');
+export const todayContainer = document.querySelector("#today");
+export const forecastContainer = document.querySelector('#forecast');
 export const searchHistoryContainer = document.querySelector('#history');
 // FORM
 const searchInput = document.querySelector('#search-input');
@@ -16,13 +16,13 @@ let handleSearchFormSubmit = async event => {
   const coordsJSON = await getCoordinates(searchInput.value);
   const weatherJSON = await getWeatherFromCoordinates(coordsJSON);
   searchInput.value = "";
-  buildUI(weatherJSON);
+  buildUI(searchInput.value, weatherJSON);
 }
 
 const initApp = async () => {
   const currentCoords = await getCurrentLocation();
   const currentWeatherJSON = await getWeatherFromCoordinates(currentCoords);
-  buildUI(currentWeatherJSON);
+  buildUI(searchInput.value, currentWeatherJSON);
   getHistory();
 }
 
