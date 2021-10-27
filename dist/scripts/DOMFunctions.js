@@ -126,7 +126,7 @@ export const getHistory = () => {
 export const handleSearchHistoryClick = async (event) => {
   let btn = event.target;
   let historySearch = btn.getAttribute('data-search');
-  const coordsJSON = await getCoordinates(historySearch);
+  const coordsJSON = await getCoordinatesFromSearch(historySearch);
   const weatherJSON = await getWeatherFromCoordinates(coordsJSON);
   buildUI(historySearch, weatherJSON);
 }
