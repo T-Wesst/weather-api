@@ -1,11 +1,26 @@
-import { getCoordinates, getWeatherFromCoordinates } from "./getData.js";
-import { searchHistoryContainer, todayContainer, forecastContainer } from "./index.js";
+import { getCoordinatesFromSearch, getWeatherFromCoordinates } from "./getData.js";
 
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
 
-// ============== CURRENT WEATHER UI ============== 
+const todayContainer = document.querySelector("#today");
+const forecastContainer = document.querySelector('#forecast');
+export const searchHistoryContainer = document.querySelector('#history');
+export const searchInput = document.querySelector('#search-input');
+export const searchForm = document.querySelector('#search-form');
 
+// FORM
+export const handleSearchFormSubmit = async event => {
+  if(!searchInput.value.trim()) return;
+  event.preventDefault();
+  appendToHistory(searchInput.value);
+  const coordsJSON = await getCoordinatesFromSearch(searchInput.value);
+  const weatherJSON = await getWeatherFromCoordinates(coordsJSON);
+  searchInput.value = "";
+  buildUI(searchInput.value, weatherJSON);
+};
+
+// ============== CURRENT WEATHER UI ============== 
 export const buildUI = (searchText, weatherData) => {
   const { humidity, temp, wind_speed, uvi  } = weatherData.current;
   const dailyForecast = weatherData.daily;
