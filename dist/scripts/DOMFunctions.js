@@ -1,13 +1,29 @@
-import { getCoordinates, getWeatherFromCoordinates } from "./getData.js";
-import { searchHistoryContainer, todayContainer } from "./index.js";
+import { getCoordinatesFromSearch, getWeatherFromCoordinates } from "./getData.js";
 
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
 
-// ============== CURRENT WEATHER UI ============== 
+const todayContainer = document.querySelector("#today");
+const forecastContainer = document.querySelector('#forecast');
+export const searchHistoryContainer = document.querySelector('#history');
+export const searchInput = document.querySelector('#search-input');
+export const searchForm = document.querySelector('#search-form');
 
+// FORM
+export const handleSearchFormSubmit = async event => {
+  if(!searchInput.value.trim()) return;
+  event.preventDefault();
+  appendToHistory(searchInput.value);
+  const coordsJSON = await getCoordinatesFromSearch(searchInput.value);
+  const weatherJSON = await getWeatherFromCoordinates(coordsJSON);
+  searchInput.value = "";
+  buildUI(searchInput.value, weatherJSON);
+};
+
+// ============== CURRENT WEATHER UI ============== 
 export const buildUI = (searchText, weatherData) => {
   const { humidity, temp, wind_speed, uvi  } = weatherData.current;
+  const dailyForecast = weatherData.daily;
   let {timezone, current } = weatherData;
   let date = dayjs().tz(timezone).format('M/D/YYYY');
   let iconURL = `https://openweathermap.org/img/w/${current.weather[0].icon}.png`;
@@ -40,7 +56,44 @@ export const buildUI = (searchText, weatherData) => {
   `;
   todayContainer.innerHTML = '';
   todayContainer.append(card);
+  renderForecast(dailyForecast, timezone);
   }
+
+  const renderForecast = (dailyForecast, timezone) => {
+    let startDt = dayjs().tz(timezone).add(1, 'day').startOf('day').unix();
+    let endDt = dayjs().tz(timezone).add(6, 'day').startOf('day').unix();
+    let headingCol = document.createElement('div');
+    headingCol.innerHTML = `<h4 class="col-12">5-Day Forecast:</h4>`;
+    forecastContainer.innerHTML = '';
+    forecastContainer.append(headingCol);
+    dailyForecast.forEach(day => {
+      if(day.dt >= startDt && day.dt < endDt){
+        renderForecastCard(day, timezone);
+      }
+    });
+  };
+
+  const renderForecastCard = (day, timezone) => {
+  const { humidity, wind_speed, dt: unixTs, temp: {day: temp} } = day;
+  let iconURL = `https://openweathermap.org/img/w/${day.weather[0].icon}.png`;
+  let iconDescription = day.weather[0].description;
+  let col = document.createElement('div');
+  col.setAttribute('class', 'col-md');
+  col.classList.add('five-day-card');
+  col.innerHTML = `
+    <div class="card card-bg-primary h-100 text-white">
+      <div class="card-body p-2">
+      <h5 class="card-title">${dayjs.unix(unixTs).tz(timezone).format('M/D/YYYY')}
+        <img src="${iconURL}" alt="${iconDescription}">
+      </h5>
+      <p class="card-text">Temp: ${temp}°F</p>
+      <p class="card-text">Wind: ${wind_speed} MPH</p>
+      <p class="card-text">Humidity: ${humidity} %</p>
+    </div>
+  </div>
+  `;  
+forecastContainer.append(col);
+};
 
 // =============== HISTORY =============== //
 let searchHistory = [];

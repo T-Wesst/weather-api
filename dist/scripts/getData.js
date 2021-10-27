@@ -1,10 +1,10 @@
 export const getCurrentLocation = async () => {
   const { coords } = await new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject));
   return { coord: { lat: coords.latitude, lon:coords.longitude }};
-}
+};
 
 
-export const getCoordinates = async (city) => {
+export const getCoordinatesFromSearch = async (city) => {
   let url = `./.netlify/functions/getCoordinates?city=${city}`;
   try {
     const dataStream = await fetch(url);
@@ -12,7 +12,7 @@ export const getCoordinates = async (city) => {
   } catch(err) {
     console.error(err);
   }
-}
+};
 
 export const getWeatherFromCoordinates = async ({ coord }) => {
   const { lat, lon } = coord;
@@ -23,20 +23,4 @@ export const getWeatherFromCoordinates = async ({ coord }) => {
   } catch(err) {
     console.error(err);
   }
-}
-
-
-// window.onload = async () => {
-//   const {longitude, latitude} = await getCoordinates();
-//   const data = await fetchWeatherData(longitude, latitude);
-//   const {humidity, temp, wind_speed, uvi, dt} = data.current;
-//   const timezone = data.timezone;
-//   localStorage.clear();
-//   localStorage.setItem('timezone', timezone);
-//   localStorage.setItem('humidity', humidity);
-//   localStorage.setItem('temp', temp);
-//   localStorage.setItem('windSpeed', wind_speed);
-//   localStorage.setItem('uvIndex', uvi);
-//   localStorage.setItem('dt', dt);
-//   console.log(data);
-// }
+};
