@@ -1,5 +1,5 @@
 import { getCoordinates, getWeatherFromCoordinates } from "./getData.js";
-import { searchHistoryContainer, todayContainer } from "./index.js";
+import { searchHistoryContainer, todayContainer, forecastContainer } from "./index.js";
 
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
@@ -40,7 +40,24 @@ export const buildUI = (searchText, weatherData) => {
   `;
   todayContainer.innerHTML = '';
   todayContainer.append(card);
+  renderForecast(weatherData, timezone);
   }
+
+  function renderForecast(weatherData, timezone){
+    let startDt = dayjs().tz(timezone).add(1, 'day').startOf('day').unix();
+    let endDt = dayjs().tz(timezone).add(6, 'day').startOf('day').unix();
+    const dailyForecast = weatherData.daily;
+
+    let headingCol = document.createElement('div');
+    headingCol.innerHTML = `<h4 class="col-12">5-Day Forecast:</h4>`;
+    forecastContainer.innerHTML = '';
+    forecastContainer.append(headingCol);
+    dailyForecast.forEach(day => {
+      if(day.dt >= startDt && day.dt < endDt){
+        renderForecastCard(day, timezone);
+      }
+    });
+  };
 
 // =============== HISTORY =============== //
 let searchHistory = [];
