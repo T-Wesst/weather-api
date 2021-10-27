@@ -44,11 +44,9 @@ export const buildUI = (searchText, weatherData) => {
   renderForecast(dailyForecast, timezone);
   }
 
-  function renderForecast(dailyForecast, timezone){
-    console.log(dailyForecast);
+  const renderForecast = (dailyForecast, timezone) => {
     let startDt = dayjs().tz(timezone).add(1, 'day').startOf('day').unix();
     let endDt = dayjs().tz(timezone).add(6, 'day').startOf('day').unix();
-
     let headingCol = document.createElement('div');
     headingCol.innerHTML = `<h4 class="col-12">5-Day Forecast:</h4>`;
     forecastContainer.innerHTML = '';
@@ -60,7 +58,7 @@ export const buildUI = (searchText, weatherData) => {
     });
   };
 
-  function renderForecastCard(day, timezone) {
+  const renderForecastCard = (day, timezone) => {
   const { humidity, wind_speed, dt: unixTs, temp: {day: temp} } = day;
   let iconURL = `https://openweathermap.org/img/w/${day.weather[0].icon}.png`;
   let iconDescription = day.weather[0].description;
