@@ -21,7 +21,7 @@ describe('getCoordinates', () => {
         city: "los angeles"
       }
     };
-    const bodyResult ={
+    const bodyResult = {
         coord: { 
           lon: -118.2437, 
           lat: 34.0522
