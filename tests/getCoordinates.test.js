@@ -2,8 +2,7 @@ const getCoordinates = require('../serverless/getCoordinates');
 const mockAxios = require('axios');
 jest.mock('axios');
 
-mockAxios.get.mockImplementation(() => 
-Promise.resolve({
+mockAxios.get.mockResolvedValue({
   data: { 
       coord: { 
         lon: -118.2437, 
@@ -11,11 +10,11 @@ Promise.resolve({
       },
     },
     statusCode: 200,
-  })
-);
+  });
 
 
 describe('getCoordinates', () => {
+  afterEach(jest.clearAllMocks);
   test('should return an stringified object containing longitude and latitude', async () => {
     const event = { 
       queryStringParameters: {
@@ -30,5 +29,6 @@ describe('getCoordinates', () => {
     };
     const { body } = await getCoordinates.handler(event);
     expect(body).toBe(JSON.stringify(bodyResult));
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
   })
 });

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "netlify dev",
     "build": "npm i && cd ./serverless && npm i",
-    "test": "jest"
+    "test": "jest --coverage --watch"
   },
   "devDependencies": {
     "jest": "^27.2.5"
